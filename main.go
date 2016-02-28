@@ -7,11 +7,10 @@ import (
 	"os"
 	"time"
 	"github.com/forrest321/pixite/constants"
-	//"github.com/gorilla/mux"
-	//"github.com/gorilla/context"
 	"github.com/forrest321/pixite/models"
 	"github.com/gorilla/mux"
 	"github.com/forrest321/pixite/handlers"
+	"github.com/gorilla/context"
 )
 
 func main() {
@@ -24,12 +23,14 @@ func main() {
 		}
 	}()
 
-
 	r := mux.NewRouter()
+	context.Set(r, constants.ServeableOneKey, serv1)
+
 	r.Handle("/velox.js", velox.JS)
 	r.Handle("/sync", velox.SyncHandler(serv1))
-	r.HandleFunc("/",handlers.Index)
+	r.HandleFunc("/", handlers.Index)
 	http.Handle("/", r)
+
 	//listen!
 	port := os.Getenv("PORT")
 	if port == "" {

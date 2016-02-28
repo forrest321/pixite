@@ -1,9 +1,11 @@
-<span id="img"></span>
-<script src="/velox.js"></script>
-<script>
-    var serv1 = {};
-    var v = velox.sse("/sync", serv1);
-    v.onupdate = function() {
-        img.innerHTML = JSON.stringify(serv1, null, 2);
-    };
-</script>
+{{define "body"}}
+    <span id="img"></span>
+    <script src="/velox.js"></script>
+    <script>
+        var serv1 = {};
+        var v = velox.sse("/sync", serv1);
+        v.onupdate = function() {
+            img.innerHTML = JSON.stringify(serv1, null, 2);
+        };
+    </script>
+{{end}}
