@@ -16,7 +16,7 @@ func Watch(location string) (image.Image, error) {
 
 	done := make(chan bool)
 	go func() {
-		for {
+		for { //TODO: this is from the example code and definitely wrong.
 			select {
 			case event := <-watcher.Events:
 				log.Println("event:", event)
